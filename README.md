@@ -29,6 +29,10 @@ More detailed directions for playing in Steam can be accessed [here](https://doc
 
 Adding functionality to the game or additional measurements is always welcome.
 
+## Acknowledgements
+
+Thank you to the creators of [sXR](https://github.com/simpleOmnia/sXR.git) for streamlining implementing the experiment in the VR. 
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/) participant directions. Additional resources will be supplied upon request.
