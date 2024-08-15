@@ -3,6 +3,7 @@
 This project is a proof-of-concept for search and rescue (SAR) training in virtual reality from the Vision Sciences and Memory Lab at New Mexico State University. It was developed primarily for use with a Meta Quest 2 headset.
 
 **Authors:** Paean Luby, Ashley Mathis, Bryan White, Rebecca Penn, Arryn Robbins, Michael C. Hout
+![figure](https://github.com/user-attachments/assets/924b8b66-b410-4986-80e9-747dd03c9965)
 
 ## Experiment
 
@@ -23,8 +24,6 @@ To replicate the experiment conducted by our lab, check out [these](https://docs
 4. All data from the trials will be in the "Experiments" folder of the "Assets" folder.
 
 More detailed directions for playing in Steam can be accessed [here](https://docs.google.com/document/d/1zakldh99gSuYRKAK3fwoAfnc6K3CaH-al-TsETnB3ho/edit?usp=sharing).
-
-![Preview](https://raw.githubusercontent.com/PaeanLuby/SAR_VR/master/Samples/figure.png)
 
 ## Contributing
 
