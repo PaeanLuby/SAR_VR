@@ -24,7 +24,7 @@ To replicate the experiment conducted by our lab, check out [these](https://docs
 
 More detailed directions for playing in Steam can be accessed [here](https://docs.google.com/document/d/1zakldh99gSuYRKAK3fwoAfnc6K3CaH-al-TsETnB3ho/edit?usp=sharing).
 
-![Preview](https://raw.githubusercontent.com/PaeanLuby/VR_SAR/master/samples/screenshot.png)
+![Preview](https://raw.githubusercontent.com/PaeanLuby/SAR_VR/master/Samples/figure.png)
 
 ## Contributing
 
