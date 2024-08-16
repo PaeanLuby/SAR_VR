@@ -24,7 +24,7 @@ The time to find the object in each trial (ms), similarity of the object to the 
 
 1. Download Steam.
 2. From Unity, go to "Build Settings" and export a web version of game. While the game can be downloaded for the headset locally, no data will be recorded.
-3. Add the non-Steam game for your library and press play. 
+3. Add the non-Steam game to your library and press play. 
 
 More detailed directions for playing in Steam can be accessed [here](https://docs.google.com/document/d/1zakldh99gSuYRKAK3fwoAfnc6K3CaH-al-TsETnB3ho/edit?usp=sharing).
 
