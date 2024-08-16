@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.simpleomnia.simplexr": {
-      "version": "file:../Assets/sXR-master/sXR-master",
+      "version": "file:../sXR-master/sXR-master",
       "depth": 0,
       "source": "local",
       "dependencies": {

@@ -8,7 +8,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class VisibleObject : MonoBehaviour
 {
-
     private MeshRenderer meshrenderer = null;
     public XRRayInteractor leftray;
     public XRRayInteractor rightray;
@@ -27,6 +26,8 @@ public class VisibleObject : MonoBehaviour
     private bool notFoundRecorded = false;
     private enum ObjectState { found, notFound };
     private bool isTransitionHappening = false;
+    private bool isPracticeHappening = false;
+    private bool isIntroHappening = false;
     private bool objectDropped = false;
     private ObjectState state;
     private GameObject objectCopy;
@@ -49,13 +50,11 @@ public class VisibleObject : MonoBehaviour
     public void ReadStringInputTrials(string s)
     {
         numTrials = s;
-        Debug.Log(numTrials);
     }
 
     public void ReadStringInputRad(string r)
     {
         radius = r;
-        Debug.Log(radius);
     }
 
     private void Start()
@@ -69,86 +68,107 @@ public class VisibleObject : MonoBehaviour
     {
         switch (sxr.GetPhase())
         {
-            case 1: // Instruction Phase
-                switch (sxr.GetStepInTrial())
-                {
-                    case 0: // Hit trigger to start
-                        sxr.DisplayImage("triggercont");
-                        if (sxr.CheckController(ControllerButton.Trigger))
-                        {
-                            sxr.HideImagesUI();
-                            sxr.NextStep();
-                            sxr.RestartTimer();
-                        }
-                        break;
-                    case 1:
-                        sxr.DisplayImage("practiceStart");
-                        if (sxr.CheckController(ControllerButton.Trigger))
-                        {
-                            sxr.HideImagesUI();
-                            sxr.NextPhase();
-                        }
-                        break;
-                }
+            case 1: //Practice Round
+                StartCoroutine(PracticePhase());
                 break;
             case 2: // Testing Round  
-                switch (sxr.GetBlock())
+                StartCoroutine(ExperimentIntroPhase());
+                if (sxr.GetTrial() == int.Parse(numTrials) + 1)
                 {
-                    case 0: // Hit trigger to start
-                        sxr.DisplayImage("triggerSelect2_result");
-                        if (sxr.CheckController(ControllerButton.Trigger))
+                    sxr.NextPhase();
+                }
+                switch (state)
+                {
+                    //If player doesn't find object after 30 seconds, transition to next trial.
+                    case ObjectState.notFound:
+                        StartCoroutine(findObject(0));
+                        if (sxr.TimePassed() > 30)
                         {
-                            sxr.HideImagesUI();
-                            sxr.NextBlock();
+                            objectDisappear();
+                            inactiveCamera.enabled = true;
+                            playerHead.enabled = false;
+                            StartCoroutine(trialTransition(0));
+
                         }
                         break;
-                    case 1:
-                        sxr.DisplayImage("Start experiment");
+                    //If player finds object, transition to next trial.
+                    case ObjectState.found:
                         if (sxr.CheckController(ControllerButton.ButtonA))
                         {
-                            sxr.HideImagesUI();
-                            sxr.NextBlock();
-                            sxr.RestartTimer();
+                            inactiveCamera.enabled = true;
+                            playerHead.enabled = false;
+                            StartCoroutine(trialTransition(0));
                         }
-                        break;
-                    case 2:
-                        if (sxr.GetTrial() == int.Parse(numTrials) + 1)
-                        {
-                            sxr.NextPhase();
-                        }
-                        switch (state)
-                        {
-                            //If player doesn't find object after 30 seconds, transition to next trial.
-                            case ObjectState.notFound:
-                                StartCoroutine(findObject(0));
-                                if (sxr.TimePassed() > 30)
-                                {
-                                    objectDisappear();
-                                    inactiveCamera.enabled = true;
-                                    playerHead.enabled = false;
-                                    StartCoroutine(trialTransition(0));
 
-                                }
-                                break;
-                            //If player finds object, transition to next trial.
-                            case ObjectState.found:
-                                if (sxr.CheckController(ControllerButton.ButtonA))
-                                {
-                                    inactiveCamera.enabled = true;
-                                    playerHead.enabled = false;
-                                    StartCoroutine(trialTransition(0));
-                                }
-
-                                break;
-                        }
                         break;
                 }
                 break;
             case 3:
+                inactiveCamera.enabled = true;
+                playerHead.enabled = false;
                 sxr.DisplayImage("finished");
                 break;
         }
     }
+
+    IEnumerator PracticePhase() {
+        if (isPracticeHappening) {
+            yield break;
+        }
+        isPracticeHappening = true;
+        switch (sxr.GetBlock())
+        {
+            case 0: // Hit trigger to start
+                sxr.DisplayImage("triggercont");
+                if (sxr.CheckController(ControllerButton.Trigger))
+                {
+                    yield return new WaitForSeconds(1);
+                    sxr.HideImagesUI();
+                    sxr.NextBlock();
+                }
+                break;
+            
+            case 1:
+                sxr.DisplayImage("practiceStart");
+                if (sxr.CheckController(ControllerButton.Trigger))
+                {
+                    yield return new WaitForSeconds(1);
+                    sxr.HideImagesUI();
+                    sxr.NextPhase();
+                }
+                break;
+        }
+        isPracticeHappening = false;
+        
+    }
+
+    IEnumerator ExperimentIntroPhase() {
+        if (isIntroHappening) {
+            yield break;
+        }
+        isIntroHappening = true;
+        switch(sxr.GetBlock()) {
+            case 0: // Hit trigger to start
+                sxr.DisplayImage("triggerSelect2_result");
+                if (sxr.CheckController(ControllerButton.Trigger))
+                {
+                    yield return new WaitForSeconds(1);
+                    sxr.HideImagesUI();
+                    sxr.NextBlock();
+                }
+                break;
+            case 1:
+                sxr.DisplayImage("Start experiment");
+                if (sxr.CheckController(ControllerButton.ButtonA))
+                {
+                    sxr.HideImagesUI();
+                    sxr.NextBlock();
+                }
+                break;
+        }
+        isIntroHappening = false;
+    }
+        
 
     IEnumerator findObject(float time)
     {
@@ -162,8 +182,7 @@ public class VisibleObject : MonoBehaviour
         }
     }
 
-    void objectDisappear()
-    {
+    void objectDisappear() {
         if (notFoundRecorded == false)
         {
             notFoundRecorded = true;
@@ -171,7 +190,6 @@ public class VisibleObject : MonoBehaviour
             sxr.WriteToTaggedFile("mainFile", "");
             objectDropped = false;
         }
-        
     }
 
     IEnumerator trialTransition(float time) {
@@ -184,13 +202,11 @@ public class VisibleObject : MonoBehaviour
             dropObject();
         }
 
-        
-        
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(3);
         
         notFoundRecorded = false;
         StartCoroutine(takeSnapshot(2));
-        sxr.WriteHeaderToTaggedFile("mainFile", "trial number " + sxr.GetTrial() + searchObjects[randIndexSearch].name.ToString() + "item at " + originPoint.ToString() + "player at " + player.transform.position.ToString() + "intensity ratio " + mSE);
+        sxr.WriteHeaderToTaggedFile("mainFile", "trial number " + sxr.GetTrial() + searchObjects[randIndexSearch].name.ToString() + "item at " + originPoint.ToString() + "player at " + player.transform.position.ToString() + "MSE " + mSE + "Radius" + radius);
         sxr.NextTrial();
         sxr.RestartTimer();
         playerHead.enabled = true;
