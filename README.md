@@ -13,12 +13,12 @@ To replicate the experiment conducted by our lab, check out [these](https://docs
 
 Time to find the object in each trial (ms), similarity of the object to the background (quantified via mean squared error), object distance from the player, object and player positions, and object type are outputted for each player at the end of block. All data from the trials will be in the "Experiments" folder of the "Assets" folder.
 
-
 ## Installation- Unity
 
-1. Open the project in Unity.
+1. Open the project in Unity. The versions the platform is currently known to work in are 2021.3.24f1 and 2022.3.42f1.
 2. Download and open [Meta Quest Link](https://www.meta.com/help/quest/articles/headsets-and-accessories/oculus-rift-s/install-app-for-link/).
-3. Press the "Play" button at the top of the screen. Connect the headset via Air Link or Link Cable. If you don't connect a headset, then the program will run in desktop mode, which doesn't have interactive controls.
+3. Go Assets > My Assets > SAR_Game.
+4. Press the "Play" button at the top of the screen. Connect the headset via Air Link or Link Cable. If you don't connect a headset, then the program will run in desktop mode, which doesn't have interactive controls.
 
 ## Installation- Steam
 
