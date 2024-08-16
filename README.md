@@ -30,7 +30,7 @@ More detailed directions for playing in Steam can be accessed [here](https://doc
 
 ## Contributing
 
-Adding functionality to the game or additional measurements is always welcome.
+Adding functionality to the game or additional measurements is always welcome. Contact paean.luby@richmond.edu with any questions about contributing.
 
 ## Acknowledgements
 
