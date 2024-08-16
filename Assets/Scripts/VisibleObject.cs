@@ -122,7 +122,7 @@ public class VisibleObject : MonoBehaviour
                 sxr.DisplayImage("triggercont");
                 if (sxr.CheckController(ControllerButton.Trigger))
                 {
-                    yield return new WaitForSeconds(1);
+                    yield return new WaitForSeconds(2);
                     sxr.HideImagesUI();
                     sxr.NextBlock();
                 }
@@ -132,7 +132,7 @@ public class VisibleObject : MonoBehaviour
                 sxr.DisplayImage("practiceStart");
                 if (sxr.CheckController(ControllerButton.Trigger))
                 {
-                    yield return new WaitForSeconds(1);
+                    yield return new WaitForSeconds(2);
                     sxr.HideImagesUI();
                     sxr.NextPhase();
                 }
@@ -152,7 +152,7 @@ public class VisibleObject : MonoBehaviour
                 sxr.DisplayImage("triggerSelect2_result");
                 if (sxr.CheckController(ControllerButton.Trigger))
                 {
-                    yield return new WaitForSeconds(1);
+                    yield return new WaitForSeconds(2);
                     sxr.HideImagesUI();
                     sxr.NextBlock();
                 }
