@@ -11,7 +11,7 @@ To replicate the experiment conducted by our lab, check out [these](https://docs
 
 ## Data Collected
 
-Time to find the object in each trial (ms), similarity of the object to the background (quantified via mean squared error), object distance from the player, and object type are outputted for each player for each block. All data from the trials will be in the "Experiments" folder of the "Assets" folder.
+Time to find the object in each trial (ms), similarity of the object to the background (quantified via mean squared error), object distance from the player, object and player positions, and object type are outputted for each player at the end of block. All data from the trials will be in the "Experiments" folder of the "Assets" folder.
 
 
 ## Installation- Unity
